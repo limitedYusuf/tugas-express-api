@@ -3,7 +3,6 @@ const Sequelize = require('sequelize');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // Create the RoleMenuPermissions table
     await queryInterface.createTable('RoleMenuPermissions', {
       id: {
         allowNull: false,
@@ -14,11 +13,11 @@ module.exports = {
       RoleId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Roles', // The name of the target model (the table name)
-          key: 'id',       // The name of the target column (the primary key)
+          model: 'Roles',
+          key: 'id',
         },
-        onUpdate: 'CASCADE', // Cascade updates to related rows
-        onDelete: 'CASCADE', // Cascade deletes to related rows
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       MenuId: {
         type: Sequelize.INTEGER,

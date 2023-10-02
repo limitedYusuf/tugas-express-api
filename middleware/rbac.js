@@ -14,7 +14,18 @@ async function canAccess(req, res, next) {
     }
 
     const menuData = await models.Menus.findOne({ where: { name: menu } });
+
+    // apakah menuData tidak ditemukan
+    if (!menuData) {
+      return res.status(404).json({ message: 'Menu tidak terdaftar.' });
+    }
+
     const permissionData = await models.Permissions.findOne({ where: { name: permission } });
+
+    // apakah permissionData tidak ditemukan
+    if (!permissionData) {
+      return res.status(404).json({ message: 'Permission tidak terdaftar.' });
+    }
 
     // variabel untuk menentukan apakah pengguna memiliki akses
     let hasAccess = false;

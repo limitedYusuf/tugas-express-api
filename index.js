@@ -1,13 +1,14 @@
+// import package
 const express = require('express');
 const moment = require('moment-timezone');
 const bodyParser = require('body-parser');
-const passport = require('./config/configPassport');
-const session = require('express-session');
-const canAccess = require('./middleware/rbac');
-const configSession = require('./config/configSession');
-const { ensureAuthenticated } = require('./middleware/auth');
-const authRoutes = require('./routes/auth');
 const compression = require("compression");
+const session = require('express-session');
+// import config
+const passport = require('./config/configPassport');
+const configSession = require('./config/configSession');
+// import route
+const indexRoutes = require('./routes/index');
 
 const app = express();
 const port = 3000;
@@ -24,13 +25,7 @@ app.use(session(configSession));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api/auth', authRoutes);
-app.get('/api/dashboard', ensureAuthenticated, (req, res, next) => {
-  req.customData = { menu: 'dashboard', permission: 'read' };
-  canAccess(req, res, next);
-}, (req, res) => {
-  res.json({ message: 'Dashboard menu' });
-});
+app.use('/', indexRoutes);
 
 app.listen(port, () => {
   console.log(`Server berjalan di port ${port}`);

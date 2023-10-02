@@ -2,7 +2,6 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const configdb = require('./database');
 
-// Definisikan model untuk sesi
 const Session = configdb.define('Session', {
   sid: {
     type: configdb.Sequelize.STRING,
