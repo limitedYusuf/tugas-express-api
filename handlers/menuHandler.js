@@ -1,6 +1,13 @@
+const { validationResult } = require('express-validator');
 const models = require('../models');
 
 async function createMenu(req, res) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const { name } = req.body;
     const newMenu = await models.Menus.create({ name });
@@ -26,6 +33,12 @@ async function getAllMenus(req, res) {
 }
 
 async function updateMenu(req, res) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const menuId = req.params.id;
     const { name } = req.body;
@@ -42,6 +55,12 @@ async function updateMenu(req, res) {
 }
 
 async function deleteMenu(req, res) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  
   try {
     const menuId = req.params.id;
     await models.Menus.destroy({ where: { id: menuId } });

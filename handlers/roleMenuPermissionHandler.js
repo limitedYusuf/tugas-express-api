@@ -1,6 +1,13 @@
+const { validationResult } = require('express-validator');
 const models = require('../models');
 
 async function createRoleMenuPermission(req, res) {
+   const errors = validationResult(req);
+
+   if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+   }
+
    try {
       const { RoleId, MenuId, PermissionId } = req.body;
 
@@ -22,8 +29,40 @@ async function createRoleMenuPermission(req, res) {
 
 async function getAllRoleMenuPermissions(req, res) {
    try {
-      const roleMenuPermissions = await models.RoleMenuPermissions.findAll();
-      res.json(roleMenuPermissions);
+      const roleMenuPermissions = await models.RoleMenuPermissions.findAll({
+         include: [
+            {
+               model: models.Roles,
+               attributes: ['name'],
+               as: 'Role',
+            },
+            {
+               model: models.Menus,
+               attributes: ['name'],
+               as: 'Menu',
+            },
+            {
+               model: models.Permissions,
+               attributes: ['name'],
+               as: 'Permission',
+            },
+         ],
+      });
+
+      const formattedRoleMenuPermissions = roleMenuPermissions.map((roleMenuPermission) => {
+         return {
+            RoleId: roleMenuPermission.RoleId,
+            MenuId: roleMenuPermission.MenuId,
+            PermissionId: roleMenuPermission.PermissionId,
+            RoleName: roleMenuPermission.Role.name,
+            MenuName: roleMenuPermission.Menu.name,
+            PermissionName: roleMenuPermission.Permission.name,
+            createdAt: roleMenuPermission.createdAt,
+            updatedAt: roleMenuPermission.updatedAt,
+         };
+      });
+
+      res.json(formattedRoleMenuPermissions);
    } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Gagal mendapatkan RoleMenuPermissions' });
@@ -31,6 +70,12 @@ async function getAllRoleMenuPermissions(req, res) {
 }
 
 async function updateRoleMenuPermission(req, res) {
+   const errors = validationResult(req);
+
+   if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+   }
+
    try {
       const roleMenuPermissionId = req.params.id;
       const { RoleId, MenuId, PermissionId } = req.body;
@@ -53,6 +98,12 @@ async function updateRoleMenuPermission(req, res) {
 }
 
 async function deleteRoleMenuPermission(req, res) {
+   const errors = validationResult(req);
+
+   if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+   }
+
    try {
       const roleMenuPermissionId = req.params.id;
 

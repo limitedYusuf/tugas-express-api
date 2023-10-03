@@ -1,7 +1,14 @@
+const { validationResult } = require('express-validator');
 const passport = require('passport');
 const models = require('../models');
 
 async function handleLogin(req, res, next) {
+   const errors = validationResult(req);
+
+   if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+   }
+
    passport.authenticate('local', async (err, user, info) => {
       if (err) {
          return next(err);

@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Permission = sequelize.define('Permissions', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,

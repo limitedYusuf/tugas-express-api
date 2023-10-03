@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Siswa = sequelize.define('Siswas', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     nama: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Kelas = sequelize.define('Kelas', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     nama: {
       type: DataTypes.STRING,
       allowNull: false,

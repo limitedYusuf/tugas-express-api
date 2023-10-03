@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const UserRoles = sequelize.define('UserRoles', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     UserId: {
       type: DataTypes.INTEGER,
       allowNull: false,

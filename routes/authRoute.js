@@ -1,9 +1,12 @@
 const express = require('express');
-const router = express.Router();
+// import other
 const { handleLogin, handleCheckLogin, handleLogout } = require('../handlers/authHandler');
+const { validateAuth } = require('../validators/authValidator');
+
+const router = express.Router();
 
 // API untuk login
-router.post('/login', handleLogin);
+router.post('/login', validateAuth, handleLogin);
 
 // API untuk logout
 router.get('/logout', handleLogout);

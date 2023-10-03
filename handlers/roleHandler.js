@@ -1,6 +1,13 @@
+const { validationResult } = require('express-validator');
 const models = require('../models');
 
 async function createRole(req, res) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const { name } = req.body;
     const newRole = await models.Roles.create({ name });
@@ -26,6 +33,12 @@ async function getAllRoles(req, res) {
 }
 
 async function updateRole(req, res) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const roleId = req.params.id;
     const { name } = req.body;
@@ -42,6 +55,12 @@ async function updateRole(req, res) {
 }
 
 async function deleteRole(req, res) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const roleId = req.params.id;
     await models.Roles.destroy({ where: { id: roleId } });
