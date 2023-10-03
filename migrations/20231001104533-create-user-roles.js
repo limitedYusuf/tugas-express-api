@@ -40,6 +40,12 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
       },
     });
+
+    await queryInterface.addConstraint('UserRoles', {
+      fields: ['UserId', 'RoleId'],
+      type: 'unique',
+      name: 'unique_user_role'
+    });
   },
 
   down: async (queryInterface, Sequelize) => {

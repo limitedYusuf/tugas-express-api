@@ -4,17 +4,21 @@ const express = require('express');
 const canAccess = require('../middleware/rbac');
 const { ensureAuthenticated } = require('../middleware/auth');
 // import route
-const authRoutes = require('./auth');
-const roleRoutes = require('./role');
-const menuRoutes = require('./menu');
-const permissionRoutes = require('./permission');
+const authRoute = require('./authRoute');
+const roleRoute = require('./roleRoute');
+const menuRoute = require('./menuRoute');
+const permissionRoute = require('./permissionRoute');
+const userRolesRoute = require('./userRolesRoute');
+const roleMenuPermissionRoute = require('./roleMenuPermissionRoute');
 
 const router = express.Router();
 
-router.use('/api', authRoutes);
-router.use('/api', roleRoutes);
-router.use('/api', menuRoutes);
-router.use('/api', permissionRoutes);
+router.use('/api', authRoute);
+router.use('/api', roleRoute);
+router.use('/api', menuRoute);
+router.use('/api', permissionRoute);
+router.use('/api', userRolesRoute);
+router.use('/api', roleMenuPermissionRoute);
 
 // dashboard
 router.get('/api/dashboard', ensureAuthenticated, (req, res, next) => {

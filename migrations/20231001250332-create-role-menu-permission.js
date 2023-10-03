@@ -48,6 +48,12 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
       },
     });
+
+    await queryInterface.addConstraint('RoleMenuPermissions', {
+      fields: ['RoleId', 'MenuId', 'PermissionId'],
+      type: 'unique',
+      name: 'unique_role_menu_permission'
+    });
   },
 
   async down(queryInterface, Sequelize) {
