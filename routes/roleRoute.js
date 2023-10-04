@@ -10,25 +10,25 @@ const router = express.Router();
 
 // CREATE: Tambahkan role baru
 router.post('/roles', ensureAuthenticated, validateCreateRole, (req, res, next) => {
-   req.customData = { menu: 'rbac', role: 'write' };
+   req.customData = { menu: 'rbac', permission: 'write' };
    canAccess(req, res, next);
 }, createRole);
 
 // READ: Dapatkan semua role
 router.get('/roles', ensureAuthenticated, (req, res, next) => {
-   req.customData = { menu: 'rbac', role: 'read' };
+   req.customData = { menu: 'rbac', permission: 'read' };
    canAccess(req, res, next);
 }, getAllRoles);
 
 // UPDATE: Perbarui role berdasarkan ID
 router.put('/roles/:id', ensureAuthenticated, validateUpdateRole, (req, res, next) => {
-   req.customData = { menu: 'rbac', role: 'edit' };
+   req.customData = { menu: 'rbac', permission: 'edit' };
    canAccess(req, res, next);
 }, updateRole);
 
 // DELETE: Hapus role berdasarkan ID
 router.delete('/roles/:id', ensureAuthenticated, validateDestroyRole, (req, res, next) => {
-   req.customData = { menu: 'rbac', role: 'destroy' };
+   req.customData = { menu: 'rbac', permission: 'destroy' };
    canAccess(req, res, next);
 }, deleteRole);
 

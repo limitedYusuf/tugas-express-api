@@ -34,8 +34,8 @@ module.exports = {
     await queryInterface.bulkInsert('Menus', [
       { name: 'dashboard' },
       { name: 'rbac' },
-      { name: 'kelas' },
-      { name: 'siswa' },
+      { name: 'category' },
+      { name: 'post' },
     ]);
 
     // Tambahkan data ke dalam tabel Permission
@@ -53,14 +53,14 @@ module.exports = {
       { RoleId: 1, MenuId: 2, PermissionId: 2 }, // Admin memiliki izin untuk menulis RBAC
       { RoleId: 1, MenuId: 2, PermissionId: 3 }, // Admin memiliki izin untuk mengedit RBAC
       { RoleId: 1, MenuId: 2, PermissionId: 4 }, // Admin memiliki izin untuk menghapus RBAC
-      { RoleId: 2, MenuId: 3, PermissionId: 1 }, // Editor memiliki izin untuk membaca kelas
-      { RoleId: 2, MenuId: 3, PermissionId: 2 }, // Editor memiliki izin untuk menulis kelas
-      { RoleId: 2, MenuId: 3, PermissionId: 3 }, // Editor memiliki izin untuk mengedit kelas
-      { RoleId: 2, MenuId: 3, PermissionId: 4 }, // Editor memiliki izin untuk menghapus kelas
-      { RoleId: 2, MenuId: 4, PermissionId: 1 }, // Editor memiliki izin untuk membaca siswa
-      { RoleId: 2, MenuId: 4, PermissionId: 2 }, // Editor memiliki izin untuk menulis siswa
-      { RoleId: 2, MenuId: 4, PermissionId: 3 }, // Editor memiliki izin untuk mengedit siswa
-      { RoleId: 2, MenuId: 4, PermissionId: 4 }, // Editor memiliki izin untuk menghapus siswa
+      { RoleId: 2, MenuId: 3, PermissionId: 1 }, // Editor memiliki izin untuk membaca category
+      { RoleId: 2, MenuId: 3, PermissionId: 2 }, // Editor memiliki izin untuk menulis category
+      { RoleId: 2, MenuId: 3, PermissionId: 3 }, // Editor memiliki izin untuk mengedit category
+      { RoleId: 2, MenuId: 3, PermissionId: 4 }, // Editor memiliki izin untuk menghapus category
+      { RoleId: 2, MenuId: 4, PermissionId: 1 }, // Editor memiliki izin untuk membaca post
+      { RoleId: 2, MenuId: 4, PermissionId: 2 }, // Editor memiliki izin untuk menulis post
+      { RoleId: 2, MenuId: 4, PermissionId: 3 }, // Editor memiliki izin untuk mengedit post
+      { RoleId: 2, MenuId: 4, PermissionId: 4 }, // Editor memiliki izin untuk menghapus post
     ]);
   },
 

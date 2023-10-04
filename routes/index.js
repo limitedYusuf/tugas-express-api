@@ -10,6 +10,8 @@ const menuRoute = require('./menuRoute');
 const permissionRoute = require('./permissionRoute');
 const userRolesRoute = require('./userRolesRoute');
 const roleMenuPermissionRoute = require('./roleMenuPermissionRoute');
+const categoryRoute = require('./categoryRoute');
+const postRoute = require('./postRoute');
 
 const router = express.Router();
 
@@ -19,6 +21,8 @@ router.use('/api', menuRoute);
 router.use('/api', permissionRoute);
 router.use('/api', userRolesRoute);
 router.use('/api', roleMenuPermissionRoute);
+router.use('/api', categoryRoute);
+router.use('/api', postRoute);
 
 // dashboard
 router.get('/api/dashboard', ensureAuthenticated, (req, res, next) => {
