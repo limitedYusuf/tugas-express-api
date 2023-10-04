@@ -1,7 +1,7 @@
 const express = require('express');
 // import config
-const canAccess = require('../middleware/rbac');
-const { ensureAuthenticated } = require('../middleware/auth');
+const canAccess = require('../middleware/rbacMiddleware');
+const { ensureAuthenticated } = require('../middleware/authMiddleware');
 // import other
 const { createRole, getAllRoles, updateRole, deleteRole } = require('../handlers/roleHandler');
 const { validateCreateRole, validateUpdateRole, validateDestroyRole } = require('../validators/roleValidator');

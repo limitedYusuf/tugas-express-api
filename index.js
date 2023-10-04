@@ -11,7 +11,7 @@ const configSession = require('./config/configSession');
 const indexRoutes = require('./routes/index');
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
 moment.tz.setDefault('Asia/Makassar');
 
@@ -26,6 +26,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRoutes);
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
 
 app.listen(port, () => {
   console.log(`Server berjalan di port ${port}`);

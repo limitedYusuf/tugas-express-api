@@ -1,7 +1,7 @@
 const express = require('express');
 // import config
-const canAccess = require('../middleware/rbac');
-const { ensureAuthenticated } = require('../middleware/auth');
+const canAccess = require('../middleware/rbacMiddleware');
+const { ensureAuthenticated } = require('../middleware/authMiddleware');
 // import other
 const { createCategory, getAllCategories, updateCategory, deleteCategory } = require('../handlers/categoryHandler');
 const { validateCreateCategory, validateUpdateCategory, validateDestroyCategory } = require('../validators/categoryValidator');

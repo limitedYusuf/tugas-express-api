@@ -2,6 +2,9 @@ const { validationResult } = require('express-validator');
 const passport = require('passport');
 const models = require('../models');
 
+const jwt = require('jsonwebtoken');
+const { SECRET_KEY } = require('../config/configToken');
+
 async function handleLogin(req, res, next) {
    const errors = validationResult(req);
 
@@ -56,6 +59,9 @@ async function handleLogin(req, res, next) {
             roles,
             canAccess,
          };
+
+         const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
+         response.token = token;
 
          // Simpan dalam sesi
          req.session.roles = roles;

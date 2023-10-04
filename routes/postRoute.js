@@ -1,8 +1,8 @@
 const express = require('express');
 const multer = require('multer');
 // import config
-const canAccess = require('../middleware/rbac');
-const { ensureAuthenticated } = require('../middleware/auth');
+const canAccess = require('../middleware/rbacMiddleware');
+const { ensureAuthenticated } = require('../middleware/authMiddleware');
 // import other
 const { createPost, getAllPosts, updatePost, deletePost } = require('../handlers/postHandler');
 const { validateCreatePost, validateUpdatePost, validateDestroyPost } = require('../validators/postValidator');
